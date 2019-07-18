@@ -1,7 +1,7 @@
 {
-  "name": "bot-eventos",
+  "name": "bot-monitoramento",
   "version": "1.0.0",
-  "description": "bot para eventos",
+  "description": "bot para monitoramento",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,22 +11,17 @@
     "url": "git+https://github.com/github.com/ErnandesAJr.git"
   },
   "author": "Ernandes",
-  "license": "ISC",
+  "license": "NONE",
   "bugs": {
     "url": "https://github.com/github.com/ErnandesAJr/issues"
   },
   "homepage": "https://github.com/github.com/ErnandesAJr#readme",
   "dependencies": {
-    "express": "^4.16.3",
-    "forever": "^0.15.3",
-    "forever-monitor": "^1.7.1",
+    "axios": "^0.19.0",
+    "dotenv": "^8.0.0",
     "moment": "^2.22.2",
     "mysql": "^2.16.0",
-    "pg": "^7.4.3",
-    "request": "^2.88.0",
-    "string-format": "^2.0.0",
     "tcp-ping": "^0.1.1",
-    "telegram-node-bot": "^4.0.5",
-    "telegram-test-api": "^1.0.6"
+    "telegram-node-bot": "^4.0.5"
   }
 }

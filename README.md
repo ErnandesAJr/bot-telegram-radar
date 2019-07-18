@@ -1,21 +1,23 @@
-Para instalação : 
- >   "express": "^4.16.3",
- >   "moment": "^2.22.2",
- >   "mysql": "^2.16.0",
- >   "pg": "^7.4.3",
- >   "request": "^2.88.0",
- >   "string-format": "^2.0.0",
- >   "tcp-ping": "^0.1.1",
- >   "telegram-node-bot": "^4.0.5".
+# BOT - Backend
 
+Node.js - BOT - Backend
 
-1) sudo apt-get update
-2) sudo apt-get install nodejs
-3) sudo apt-get install npm
+## Setup
 
->  npm install -g express
+PORT_PLAY=
+HOST_PLAY=
+WORKERS=
 
+TOKEN_STRIX_MOBIT=
+TOKEN_JACURUTU_MOBIT=
+URL_API_EQUIPAMENTO=
+URL_API_BASES=
+URL_API_LOG_BOT=
 
-//> https://www.digitalocean.com/community/tutorials/como-instalar-o-node-js-no-ubuntu-16-04-pt
+## Instalar as dependências
 
-http://blog.locaweb.com.br/artigos/desenvolvimento-artigos/instalando-node-js-6-x-e-npm-no-ubuntu-16-04/
+npm install
+
+## Rodar as aplicações
+
+npm start
