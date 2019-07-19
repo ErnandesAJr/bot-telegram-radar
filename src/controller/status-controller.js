@@ -32,7 +32,8 @@ class StatusController extends TelegramBaseController {
             api.salvarLog($.message,'Enviado '+ site)
                 
             api.buscarSite(site).then((resposta)=>{
-                if(resposta.descricao.indexOf("não")>=0){
+                console.log(resposta.dados[0])
+                if(resposta.descricao.indexOf("não") >= 0){
                     $.sendMessage(
                         (
                         resposta.descricao + '\n' +
@@ -41,38 +42,61 @@ class StatusController extends TelegramBaseController {
                         
                         ).catch(err => console.log(err));
                 }else{
+
                     var status = ''
-                
-                    if(resposta.dados[0].informacoes[0].status !== 'NORMAL'){
+
+
+                    if(resposta.dados[0].informacoes[0].status === 'VAZIO'){
                         status = '\n' + ' ** PROBLEMAS APRESENTADOS ** ' + '\n'
                         resposta.dados[0].informacoes[0].descricao.forEach(element => {
                             status +=  '\n' + element + '\n'
                         });
+                        $.sendMessage(
+                            (
+                                ' /-------------------------- DADOS -----------------------/  ' + '\n \n'+
+
+                                'Equipamento = > ' +   resposta.dados[0].equipamento + '\n' +
+                                'Cidade = > ' + resposta.dados[0].cidade  + '\n \n' +
+
+                                ' /----------------------- STATUS --------------------/  ' + '\n' + status +
+                                '** Instalar o Utils é muito importante **'
+                            )
+                            
+                        ).catch(err => console.log(err));
                     }else{
-                        status = '\n' + 'Site não apresentou nenhum problema !' + '\n'+ 'Tudo ok, vida que segue !'
-                    }
-                    $.sendMessage(
-                        (
-                            ' /-------------------------- DADOS -----------------------/  ' + '\n \n'+
 
-                            'Equipamento = > ' +   resposta.dados[0].equipamento + '\n' +
-                            'Cidade = > ' + resposta.dados[0].cidade  + '\n' +
-                            'Data Script = > ' + resposta.dados[0].data_script  + '\n' +
-                            'Data Lote = > ' + resposta.dados[0].data_lote  + '\n \n' +
-
-                            ' /-------------------- INVENTÁRIO -----------------/  ' + '\n \n'+
-                            'Processador = > ' + resposta.dados[0].inventario[0].processador  + '\n' +
-                            'Memoria Ram = > ' + resposta.dados[0].inventario[0].memoria_ram + ' Gb' + '\n' +
-                            'Tamanho do Disco = > ' + resposta.dados[0].inventario[0].tamanho_disco + ' Gb'  + '\n' +
-                            'OCR = > ' + resposta.dados[0].inventario[0].ocr  + '\n' +
-                            'Número de câmeras = > ' + resposta.dados[0].inventario[0].numero_de_cameras  + '\n' +
-                            'Versão do RSSERVICEMANGER = > ' + resposta.dados[0].inventario[0].versao_rsservicemanager  + '\n' +
-                            'Versão do MobitUtils = > ' + resposta.dados[0].inventario[0].versao_mobitutils + '\n \n' +
-
-                            ' /----------------------- STATUS --------------------/  ' + '\n' + status 
-                        )
                         
-                    ).catch(err => console.log(err));
+                        if(resposta.dados[0].informacoes[0].status !== 'NORMAL'){
+                            status = '\n' + ' ** PROBLEMAS APRESENTADOS ** ' + '\n'
+                            resposta.dados[0].informacoes[0].descricao.forEach(element => {
+                                status +=  '\n' + element + '\n'
+                            });
+                        }else{
+                            status = '\n' + 'Site não apresentou nenhum problema !' + '\n'+ 'Tudo ok, vida que segue !'
+                        }
+                        $.sendMessage(
+                            (
+                                ' /-------------------------- DADOS -----------------------/  ' + '\n \n'+
+
+                                'Equipamento = > ' +   resposta.dados[0].equipamento + '\n' +
+                                'Cidade = > ' + resposta.dados[0].cidade  + '\n' +
+                                'Data Script = > ' + resposta.dados[0].data_script  + '\n' +
+                                'Data Lote = > ' + resposta.dados[0].data_lote  + '\n \n' +
+
+                                ' /-------------------- INVENTÁRIO -----------------/  ' + '\n \n'+
+                                'Processador = > ' + resposta.dados[0].inventario[0].processador  + '\n' +
+                                'Memoria Ram = > ' + resposta.dados[0].inventario[0].memoria_ram + ' Gb' + '\n' +
+                                'Tamanho do Disco = > ' + resposta.dados[0].inventario[0].tamanho_disco + ' Gb'  + '\n' +
+                                'OCR = > ' + resposta.dados[0].inventario[0].ocr  + '\n' +
+                                'Número de câmeras = > ' + resposta.dados[0].inventario[0].numero_de_cameras  + '\n' +
+                                'Versão do RSSERVICEMANGER = > ' + resposta.dados[0].inventario[0].versao_rsservicemanager  + '\n' +
+                                'Versão do MobitUtils = > ' + resposta.dados[0].inventario[0].versao_mobitutils + '\n \n' +
+
+                                ' /----------------------- STATUS --------------------/  ' + '\n' + status 
+                            )
+                            
+                        ).catch(err => console.log(err));
+                     }
                 }
             
             })

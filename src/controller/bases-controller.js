@@ -30,34 +30,49 @@ class BasesController extends TelegramBaseController {
             api.salvarLog($.message,'Base procurada => ' + base)
             var verificou = false
             var contador = resultado.base.length
+           
+                    api.buscarBases().then((resposta)=>{
+                       
+                        if(resposta.descricao.indexOf('Nenhuma') < 0){
 
-            api.buscarBases().then((resposta)=>{
+                            resposta.dados.forEach((base_) => {
+                                contador--
+                                if(base === base_.nome){
+                                    verificou = true
+                                    $.sendMessage('Base => ' + base_.nome + '\n').then(()=>{
+                                                    
+                                    $.sendLocation(base_.latitude,base.longitude).catch(err => console.log(err))
                 
-                resposta.dados.forEach((base_) => {
-                    contador--
-                    if(base === base_.nome){
-                        verificou = true
-                        $.sendMessage('Base => ' + base_.nome + '\n').then(()=>{
-                                          
-                        $.sendLocation(base_.latitude,base.longitude).catch(err => console.log(err))
-    
-                        }).catch(err => console.log(err))      
-                    } 
+                                    }).catch(err => console.log(err))      
+                                } 
 
-                    if(contador === 0 && verificou === false){
-                        $.sendMessage(
-                            (
-                            
-                            'Tente novamente, basta clicar aqui = > /bases' + '\n' +
-                            'Outros comandos = > /comandos' + '\n'
-    
-                            )
-                            
-                            ).catch(err => console.log(err));
-                    }
+                                if(contador === 0 && verificou === false){
+                                    $.sendMessage(
+                                        (
+                                        
+                                        'Tente novamente, basta clicar aqui = > /bases' + '\n' +
+                                        'Outros comandos = > /comandos' + '\n'
+                
+                                        )
+                                        
+                                        ).catch(err => console.log(err));
+                                }
 
-                 });
-            })
+                            });
+                         }else{
+                            $.sendMessage(
+                                (
+                                resposta.descricao + '\n' +                                
+                                'Tente novamente, basta clicar aqui = > /bases' + '\n' +
+                                'Outros comandos = > /comandos' + '\n'
+        
+                                )
+                                
+                                ).catch(err => console.log(err));
+                         }
+
+                    })
+           
             
         })
     }

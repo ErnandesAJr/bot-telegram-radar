@@ -17,7 +17,7 @@ const TextCommand = Telegram.TextCommand
 /**
  * Resposavel para se conecta com o bot do telegram, através do TOKEN e com o tratamento nesse servidor, passando host , porta e quantidade de 'trabalhadores'  
 */
-const chatbot = new Telegram.Telegram(process.env.TOKEN_JACURUTU_MOBIT,{
+const chatbot = new Telegram.Telegram(process.env.TOKEN_BOT,{
     webAdmin: {
       port: process.env.PORT_PLAY,
       host: process.env.HOST_PLAY
