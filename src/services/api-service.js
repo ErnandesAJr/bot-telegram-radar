@@ -20,7 +20,6 @@ module.exports = {
         })
     },
     buscarSite(nome) {
-
         return new Promise((resolve,reject) => {
 
             var reposta_mensagem = []

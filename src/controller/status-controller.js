@@ -32,7 +32,6 @@ class StatusController extends TelegramBaseController {
             api.salvarLog($.message,'Enviado '+ site)
                 
             api.buscarSite(site).then((resposta)=>{
-                console.log(resposta.dados[0])
                 if(resposta.descricao.indexOf("não") >= 0){
                     $.sendMessage(
                         (
